@@ -1,5 +1,10 @@
 {...}:
 
 {
-  imports = [ ./firefox.nix ./editors.nix];
-}
+  imports = [ 
+    ./firefox.nix 
+    ./editors.nix
+    ./discord
+    ./element
+    ];
+} 

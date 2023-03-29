@@ -63,6 +63,7 @@
     desktopManager.xfce = {
       enable = true;
     };
+    
 
     layout = "us";
 
