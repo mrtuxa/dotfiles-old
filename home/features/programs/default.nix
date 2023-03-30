@@ -4,7 +4,8 @@
   imports = [ 
     ./firefox.nix 
     ./editors.nix
-    ./discord
-    ./element
+    ./discord.nix
+    ./element.nix
+    ./auth.nix
     ];
 } 
