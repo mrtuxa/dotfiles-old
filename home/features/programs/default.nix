@@ -7,5 +7,6 @@
     ./discord.nix
     ./element.nix
     ./auth.nix
+    ./noisetorch.nix
     ];
 } 
