@@ -1,15 +1,13 @@
 {pkgs, ...}: {
   programs = {
-    neovim = {
+    vim = {
       enable = true;
 
-      defaultEditor = true;
-
-      viAlias = true;
-      vimAlias = true;
+      defaultEditor = true; 
 
       extraConfig = ''
         set number
+        syntax on
       '';
 
       plugins = with pkgs.vimPlugins; [
@@ -19,9 +17,8 @@
         vim-go
         gotests-vim
         zig-vim
+        nerdtree
       ];
     };
   };
 }
-# TODO
-# Add vimrc to config

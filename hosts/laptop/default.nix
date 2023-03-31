@@ -16,7 +16,7 @@
 
   nix = {
     # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
+    # To make nix commands consistent with your flake
     registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
@@ -46,7 +46,6 @@
 
   boot.cleanTmpDir = true;
 
-
   # begin desktop
 
   services.xserver = {
@@ -69,20 +68,12 @@
 
     videoDrivers = ["amdgpu"];
   };
-
-
-      environment.systemPackages = [
-        pkgs.xfce.xfce4-whiskermenu-plugin
-      ];
+     
+  environment.systemPackages = [
+    pkgs.xfce.xfce4-whiskermenu-plugin
+  ];
 
   hardware.firmware = [ pkgs.linux-firmware ];
-
-
-
-  # This will run slock on loginctl lock-session
-  programs.xss-lock.enable = true;
-  programs.xss-lock.lockerCommand = "/run/wrappers/bin/slock";
-  programs.slock.enable = true;
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -120,7 +111,7 @@
       isNormalUser = true;
       extraGroups = ["wheel" "networkmanager" "docker" "audio"];
 
-      shell = pkgs.bash;
+      shell = pkgs.zsh;
     };
   };
 
@@ -139,21 +130,6 @@
   };
 
   # System Settings
-
-   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
-  };
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-02ce1833-71f1-4216-a817-217c9a6d0c42".device = "/dev/disk/by-uuid/02ce1833-71f1-4216-a817-217c9a6d0c42";
-  boot.initrd.luks.devices."luks-02ce1833-71f1-4216-a817-217c9a6d0c42".keyFile = "/crypto_keyfile.bin";
-
  
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
@@ -167,9 +143,8 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-
-  
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "22.11";
+
+  programs.zsh.enable = true; 
 }

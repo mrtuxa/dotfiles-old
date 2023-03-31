@@ -39,4 +39,18 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+   # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-02ce1833-71f1-4216-a817-217c9a6d0c42".device = "/dev/disk/by-uuid/02ce1833-71f1-4216-a817-217c9a6d0c42";
+  boot.initrd.luks.devices."luks-02ce1833-71f1-4216-a817-217c9a6d0c42".keyFile = "/crypto_keyfile.bin";
 }

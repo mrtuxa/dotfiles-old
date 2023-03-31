@@ -4,7 +4,8 @@
   imports = [
     ./direnv.nix
     ./git.nix
-    ./neovim.nix
+    ./vim.nix
+    ./utils.nix
     ./zsh.nix
   ];
 

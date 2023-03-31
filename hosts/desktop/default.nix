@@ -63,6 +63,10 @@
     desktopManager.xfce = {
       enable = true;
     };
+
+    windowManager.bspwm = {
+      enable = true;
+    }
     
 
     layout = "us";

@@ -2,11 +2,12 @@
 
 {
   imports = [ 
-    ./firefox.nix 
+    ./browser.nix 
     ./editors.nix
-    ./discord.nix
-    ./element.nix
+    ./messenger.nix
     ./auth.nix
     ./noisetorch.nix
+    ./office.nix
+    ./jetbrains.nix
     ];
 } 

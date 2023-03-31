@@ -18,7 +18,6 @@
       nix
       home-manager
       git
-
       gnupg
     ];
   };
