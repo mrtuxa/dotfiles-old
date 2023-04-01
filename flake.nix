@@ -11,8 +11,6 @@
     
     # Hardware quirks
     hardware.url = "github:nixos/nixos-hardware";
-
-  
   };
 
   outputs = {
