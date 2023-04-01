@@ -105,6 +105,8 @@
 
   # end desktop
 
+  virtualisation.docker.enable = true;
+
   users.users = {
     mrtuxa = {
       initialPassword = "nixos";
