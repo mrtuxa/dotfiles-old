@@ -8,25 +8,25 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/dc310960-64f2-45b4-98f0-3d71e8b28df9";
+    { device = "/dev/disk/by-uuid/9ef90320-f4d1-4f07-923c-98c87c0d98ad";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-786d0010-4c63-45b7-be88-222023b31edb".device = "/dev/disk/by-uuid/786d0010-4c63-45b7-be88-222023b31edb";
+  boot.initrd.luks.devices."luks-85fee872-0dec-479e-8e61-0de1c15ad77b".device = "/dev/disk/by-uuid/85fee872-0dec-479e-8e61-0de1c15ad77b";
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/F270-1264";
+    { device = "/dev/disk/by-uuid/4836-6895";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/c34326eb-01ae-4213-a59b-7f383fb9585f"; }
+    [ { device = "/dev/disk/by-uuid/63cc1746-6079-432e-b064-e4b299ed3d13"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -34,9 +34,22 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0f0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp7s0f3u1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-d95106a0-c723-4353-a8c3-394f91cdeb25".device = "/dev/disk/by-uuid/d95106a0-c723-4353-a8c3-394f91cdeb25";
+  boot.initrd.luks.devices."luks-d95106a0-c723-4353-a8c3-394f91cdeb25".keyFile = "/crypto_keyfile.bin";
 }
