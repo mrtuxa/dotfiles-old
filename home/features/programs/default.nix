@@ -11,5 +11,6 @@
     ./jetbrains.nix
     ./rust.nix
     ./programming.nix
+    ./fonts.nix
     ];
 } 

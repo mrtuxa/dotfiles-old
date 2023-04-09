@@ -13,5 +13,7 @@
     sfml
     csfml
     pkg-config
+    rust-analyzer
+    ncurses
   ];
 }

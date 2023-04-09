@@ -1,3 +1,8 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [nodejs yarn python3];
+  home.packages = with pkgs; [
+    nodejs 
+    yarn 
+    python3
+    unzip
+    ];
 }
