@@ -8,25 +8,25 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9ef90320-f4d1-4f07-923c-98c87c0d98ad";
+    { device = "/dev/disk/by-uuid/1b208688-7bbd-4fa3-b5b5-bd1f355f9139";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-85fee872-0dec-479e-8e61-0de1c15ad77b".device = "/dev/disk/by-uuid/85fee872-0dec-479e-8e61-0de1c15ad77b";
+  boot.initrd.luks.devices."luks-3c29363a-c5ce-47bf-bffc-8996ef8682c6".device = "/dev/disk/by-uuid/3c29363a-c5ce-47bf-bffc-8996ef8682c6";
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/4836-6895";
+    { device = "/dev/disk/by-uuid/3CD1-6906";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/63cc1746-6079-432e-b064-e4b299ed3d13"; }
+    [ { device = "/dev/disk/by-uuid/15212879-3e92-4c3b-984d-48bfbb7cefe0"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -34,10 +34,12 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # high-resolution display
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -50,6 +52,7 @@
   };
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-d95106a0-c723-4353-a8c3-394f91cdeb25".device = "/dev/disk/by-uuid/d95106a0-c723-4353-a8c3-394f91cdeb25";
-  boot.initrd.luks.devices."luks-d95106a0-c723-4353-a8c3-394f91cdeb25".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-21d9df91-67c4-4613-8f4b-c719b828a084".device = "/dev/disk/by-uuid/21d9df91-67c4-4613-8f4b-c719b828a084";
+  boot.initrd.luks.devices."luks-21d9df91-67c4-4613-8f4b-c719b828a084".keyFile = "/crypto_keyfile.bin";
+
 }
