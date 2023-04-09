@@ -11,6 +11,23 @@
     
     # Hardware quirks
     hardware.url = "github:nixos/nixos-hardware";
+
+
+    flake-utils.url = github:numtide/flake-utils;
+
+    nmd = {
+      url = gitlab:rycee/nmd;
+      flake = false;
+    };
+ 
+    nvim-lspconfig = {
+      url = github:neovim/nvim-lspconfig;
+      flake = false;
+    };
+    nvim-treesitter = {
+      url = github:nvim-treesitter/nvim-treesitter;
+      flake = false;
+    };
   };
 
   outputs = {
@@ -42,6 +59,12 @@
           inherit inputs outputs;
         }; # Pass flake inputs to our config
         modules = [./hosts/desktop];
+      };
+      dezentrale = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+        };
+        modules = [./hosts/dezentrale];
       };
     };
   };

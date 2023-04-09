@@ -34,9 +34,9 @@
   };
 
   networking = {
-    hostName = "mrtuxa-laptop";
+    hostName = "dezentrale";
     networkmanager.enable = true;
-    nameservers = ["1.1.1.1" "1.0.0.1"];
+    nameservers = ["9.9.9.9" "1.0.0.1"];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -52,40 +52,20 @@
     enable = true;
 
     displayManager = {
-      lightdm = {
-        enable = true;
-        background = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom.gnomeFilePath}";
+      sddm = {
+       enable = true;
       };
 
-      defaultSession = "xfce";
+      defaultSession = "plasma5";
     };
-    desktopManager.xfce = {
-      enable = true;
-    };
-    windowManager.dwm = {
+    desktopManager.plasma5 = {
       enable = true;
     };
 
+    layout = "de";
 
-    layout = "us";
-
-    videoDrivers = ["amdgpu"];
+    # Nvidia Legacy Driver
   };
-
-  # flatpak
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  
-
-/*
-   nixpkgs.overlays = [
-    (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/mrtuxa/Documents/dotfiles/home/features/desktop/dwm ;});
-    })
-];
-*/
      
   environment.systemPackages = with pkgs; [
     xfce.xfce4-whiskermenu-plugin
@@ -107,16 +87,13 @@
 
     # winetricks (all versions)
     winetricks
-
-    # native wayland support (unstable)
-    wineWowPackages.waylandFull
   ];
 
   hardware.firmware = [ pkgs.linux-firmware ];
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {keyMap = "us";};
+  console = {keyMap = "de";};
 
   services.printing.enable = true;
 
@@ -147,10 +124,10 @@
   virtualisation.docker.enable = true;
 
   users.users = {
-    mrtuxa = {
-      initialPassword = "nixos";
+    dezentrale = {
+      initialPassword = "dezentrale";
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "docker" "audio"];
+      extraGroups = [ "networkmanager" "docker" "audio"];
 
       shell = pkgs.zsh;
     };
@@ -161,13 +138,13 @@
 
     settings = {
       PermitRootLogin = "no";
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
     };
   };
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
-    users = {mrtuxa = import ../../home/mrtuxa.nix;};
+    users = {mrtuxa = import ../../home/dezentrale.nix;};
   };
 
   # System Settings

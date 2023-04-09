@@ -1,3 +1,0 @@
-[submodule "home/features/desktop/dwm"]
-	path = home/features/desktop/dwm
-	url = git@github.com:mrtuxa/dwm.git
