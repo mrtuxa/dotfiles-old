@@ -60,12 +60,14 @@
         }; # Pass flake inputs to our config
         modules = [./hosts/desktop];
       };
+      /*
       dezentrale = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs outputs;
         };
         modules = [./hosts/dezentrale];
       };
+      */
     };
   };
 }
