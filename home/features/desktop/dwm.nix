@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    vscode
-    helix
+    alacritty
+    rofi
+    nitrogen
   ];
 }

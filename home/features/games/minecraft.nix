@@ -1,3 +1,6 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [lunar-client];
+  home.packages = with pkgs; [
+    lunar-client 
+    minecraft
+  ];
 }

@@ -2,5 +2,6 @@
   home.packages = with pkgs; [
     discord
     element-desktop
+    whatsapp-for-linux
   ];
 }

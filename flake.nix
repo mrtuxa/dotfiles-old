@@ -1,5 +1,5 @@
 {
-  description = "My nix configuration";
+  description = "mrtuxa's Nix configuration";
 
   inputs = {
     # Nixpkgs
@@ -54,15 +54,29 @@
           specialArgs = {
             inherit inputs outputs;
           }; # Pass flake inputs to our config
-          modules = [ ./hosts/laptop ];
+          modules = [ ./hosts/mrtuxa-laptop ];
         };
         # Desktop Computer
         mrtuxa-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
           }; # Pass flake inputs to our config
-          modules = [ ./hosts/desktop ];
+          modules = [ ./hosts/mrtuxa-desktop ];
         };
+        mrcookie-desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          modules = [ ./hosts/mrcookie-desktop ];
+        };
+        /*
+          mrtuxa-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+          inherit inputs outputs;
+          };
+          modules = [ ./hosts/mrcookie-laptop]
+          }
+        */
         /*
           dezentrale = nixpkgs.lib.nixosSystem {
           specialArgs = {

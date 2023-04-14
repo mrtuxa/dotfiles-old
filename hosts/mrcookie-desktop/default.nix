@@ -1,10 +1,9 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   imports = [
     ../common/global
@@ -17,13 +16,13 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix commands consistent with your flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
     nixPath =
       lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
-      config.nix.registry;
+        config.nix.registry;
 
     settings = {
       # Enable flakes and new 'nix' command
@@ -34,15 +33,15 @@
   };
 
   networking = {
-    hostName = "mrtuxa-laptop";
+    hostName = "mrcookie-desktop";
     networkmanager.enable = true;
-    nameservers = ["1.1.1.1" "1.0.0.1"];
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Execute binaries as if native architecture/os
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "wasm32-wasi" "wasm64-wasi"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "wasm32-wasi" "wasm64-wasi" ];
 
   boot.cleanTmpDir = true;
 
@@ -57,19 +56,15 @@
         background = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom.gnomeFilePath}";
       };
 
-      defaultSession = "xfce";
+      defaultSession = "plasma5";
     };
-    desktopManager.xfce = {
-      enable = true;
-    };
-    windowManager.dwm = {
+    desktopManager.plasma5 = {
       enable = true;
     };
 
+    layout = "de";
 
-    layout = "us";
-
-    videoDrivers = ["amdgpu"];
+    videoDrivers = [ "nvidia" "intel" ];
   };
 
   # flatpak
@@ -77,21 +72,12 @@
   xdg.portal.enable = true;
 
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  
 
-/*
-   nixpkgs.overlays = [
-    (final: prev: {
-      dwm = prev.dwm.overrideAttrs (old: { src = /home/mrtuxa/Documents/dotfiles/home/features/desktop/dwm ;});
-    })
-];
-*/
-     
+
   environment.systemPackages = with pkgs; [
-    xfce.xfce4-whiskermenu-plugin
     virt-manager
     xorg.libXft
-     # ...
+    # ...
 
     # support both 32- and 64-bit applications
     wineWowPackages.stable
@@ -116,15 +102,15 @@
 
   time.timeZone = "Europe/Berlin";
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {keyMap = "us";};
+  console = { keyMap = "de"; };
 
   services.printing.enable = true;
 
   security.rtkit.enable = true;
-  
+
 
   hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;    ## If compatibility with 32-bit applications is desired.
+  hardware.pulseaudio.support32Bit = true; ## If compatibility with 32-bit applications is desired.
 
   fonts = {
     fonts = with pkgs; [
@@ -137,8 +123,8 @@
       source-han-serif-japanese
     ];
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Source Han Serif"];
-      sansSerif = ["Noto Sans" "Source Han Sans"];
+      serif = [ "Noto Serif" "Source Han Serif" ];
+      sansSerif = [ "Noto Sans" "Source Han Sans" ];
     };
   };
 
@@ -147,10 +133,10 @@
   virtualisation.docker.enable = true;
 
   users.users = {
-    mrtuxa = {
+    mrcookie = {
       initialPassword = "nixos";
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "docker" "audio"];
+      extraGroups = [ "wheel" "networkmanager" "docker" "audio" ];
 
       shell = pkgs.zsh;
     };
@@ -161,17 +147,17 @@
 
     settings = {
       PermitRootLogin = "no";
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
     };
   };
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
-    users = {mrtuxa = import ../../home/mrtuxa.nix;};
+    extraSpecialArgs = { inherit inputs outputs; };
+    users = { mrtuxa = import ../../home/mrcookie.nix; };
   };
 
   # System Settings
- 
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_DE.UTF-8";
     LC_IDENTIFICATION = "de_DE.UTF-8";
@@ -185,10 +171,13 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 
-  programs.zsh.enable = true; 
+  programs.zsh.enable = true;
 
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
+
+  hardware.bluetooth.enable = true;
+
 }

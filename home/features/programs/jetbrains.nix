@@ -1,3 +1,7 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [jetbrains.clion jetbrains.webstorm];
+  home.packages = with pkgs; [
+    jetbrains.clion 
+    jetbrains.webstorm 
+    jetbrains.idea-ultimate
+  ];
 }
