@@ -66,7 +66,7 @@
         mrcookie-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs outputs;
-          };
+          }; # Pass flake inputs to our config
           modules = [ ./hosts/mrcookie-desktop ];
         };
         /*

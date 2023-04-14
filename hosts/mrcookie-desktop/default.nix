@@ -56,7 +56,7 @@
         background = "${pkgs.nixos-artwork.wallpapers.simple-dark-gray-bottom.gnomeFilePath}";
       };
 
-      defaultSession = "plasma5";
+      defaultSession = "plasma";
     };
     desktopManager.plasma5 = {
       enable = true;
@@ -153,7 +153,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
-    users = { mrtuxa = import ../../home/mrcookie.nix; };
+    users = { mrcookie = import ../../home/mrcookie.nix; };
   };
 
   # System Settings
