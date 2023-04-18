@@ -1,8 +1,10 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
-    nodejs 
-    yarn 
+    nodejs
+    yarn
     python3
     unzip
-    ];
+    php
+  ];
 }
+

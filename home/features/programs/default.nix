@@ -11,5 +11,6 @@
     ./rust.nix
     ./programming.nix
     ./fonts.nix
+    ./teamspeak.nix
     ];
 } 

@@ -3,5 +3,6 @@
     jetbrains.clion 
     jetbrains.webstorm 
     jetbrains.idea-ultimate
+    jetbrains.phpstorm
   ];
 }
