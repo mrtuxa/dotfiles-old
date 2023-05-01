@@ -43,7 +43,7 @@
   # Execute binaries as if native architecture/os
   boot.binfmt.emulatedSystems = [ "aarch64-linux" "wasm32-wasi" "wasm64-wasi" ];
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   # begin desktop
 
@@ -195,4 +195,7 @@
     enable = true;
     opacityRules = [ "80:class_g = 'Alacritty'" ];
   };
+
+  networking.firewall.allowedTCPPorts = [ 9000 ];
+  networking.firewall.allowedUDPPorts = [ 9000 ];   
 }

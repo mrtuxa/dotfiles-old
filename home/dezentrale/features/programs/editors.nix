@@ -3,6 +3,5 @@
     vscode
     helix
     jetbrains.idea-ultimate
-    obsidian
   ];
 }

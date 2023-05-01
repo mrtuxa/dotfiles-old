@@ -69,22 +69,7 @@
           }; # Pass flake inputs to our config
           modules = [ ./hosts/mrcookie-desktop ];
         };
-        /*
-          mrtuxa-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-          inherit inputs outputs;
-          };
-          modules = [ ./hosts/mrcookie-laptop]
-          }
-        */
-        /*
-          dezentrale = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-          inherit inputs outputs;
-          };
-          modules = [./hosts/dezentrale];
-          };
-        */
+        
       };
     };
 }

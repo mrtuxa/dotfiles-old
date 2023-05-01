@@ -12,5 +12,6 @@
     ./programming.nix
     ./fonts.nix
     ./teamspeak.nix
+    ./admin.nix
     ];
 } 

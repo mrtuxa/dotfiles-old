@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    rustup
+    cargo
+    rustc
     rustPlatform.rustcSrc
     pango
     atk

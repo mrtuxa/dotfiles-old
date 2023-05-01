@@ -5,6 +5,9 @@
     python3
     unzip
     php
+    jdk11
+    android-tools
+    android-studio
   ];
 }
 
