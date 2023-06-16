@@ -12,7 +12,6 @@
     # Hardware quirks
     hardware.url = "github:nixos/nixos-hardware";
 
-
     flake-utils.url = "github:numtide/flake-utils";
 
     nmd = {
@@ -30,46 +29,28 @@
     };
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , ...
-    } @ inputs:
-    let
-      forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
-      inherit (self) outputs;
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    forAllSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
+    inherit (self) outputs;
+  in {
+    # Devshell for bootstrapping
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
     in
-    {
+      import ./shell.nix {inherit pkgs;});
 
-      # Devshell for bootstrapping
-      devShells = forAllSystems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        import ./shell.nix { inherit pkgs; });
-
-      nixosConfigurations = {
-        # laptop Server
-        mrtuxa-laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          }; # Pass flake inputs to our config
-          modules = [ ./hosts/mrtuxa-laptop ];
-        };
-        # Desktop Computer
-        mrtuxa-desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          }; # Pass flake inputs to our config
-          modules = [ ./hosts/mrtuxa-desktop ];
-        };
-        mrcookie-desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs outputs;
-          }; # Pass flake inputs to our config
-          modules = [ ./hosts/mrcookie-desktop ];
-        };
-        
+    nixosConfigurations = {
+      # laptop Server
+      laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs outputs;
+        }; # Pass flake inputs to our config
+        modules = [./hosts/laptop];
       };
     };
+  };
 }

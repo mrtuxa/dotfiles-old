@@ -1,17 +1,12 @@
-{...}:
-
-{
-  imports = [ 
+{...}: {
+  imports = [
     ./browser.nix 
-    ./editors.nix
-    ./messenger.nix
-    ./auth.nix
+    ./coding.nix
+    ./mail.nix
     ./office.nix
-    ./jetbrains.nix
-    ./rust.nix
-    ./programming.nix
-    ./fonts.nix
+    ./social_media.nix
     ./teamspeak.nix
-    ./admin.nix
-    ];
-} 
+    ./tools.nix
+    ./window_manager.nix
+  ];
+}

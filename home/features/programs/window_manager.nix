@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    lunar-client 
-    minecraft
+    alacritty
+    swaybg
+    waybar
   ];
 }

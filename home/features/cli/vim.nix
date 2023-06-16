@@ -2,7 +2,7 @@
   programs = {
     neovim = {
       enable = true;
-      defaultEditor = true; 
+      defaultEditor = true;
     };
   };
 }

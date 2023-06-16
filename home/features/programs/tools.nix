@@ -1,7 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    vscode
-    helix
-    jetbrains.idea-ultimate
+    wofi
+    grim
+    obs-studio
+    neofetch
   ];
 }
