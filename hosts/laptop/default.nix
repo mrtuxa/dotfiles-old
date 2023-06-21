@@ -94,7 +94,7 @@
           enable = true;
           configFile = pkgs.writeShellScript "bspwmrc" ''
             pgrep -x sxhkd > /dev/null || sxhkd &
-            feh /home/mrtuxa/todotfiles/assets/wallpaper.png
+            feh --bg-fill /home/mrtuxa/todotfiles/assets/wallpaper.png
             bspc monitor -d 1 2 3 4 5 6 7 8 9 10
             bspc config border_width         2
             bspc config window_gap          12
