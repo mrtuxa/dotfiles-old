@@ -243,6 +243,7 @@
      rofi
      sxhkd
      feh
+     polybar
   ];
 
   services.blueman.enable = true;
