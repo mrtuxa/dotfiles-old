@@ -256,6 +256,7 @@
      sxhkd
      feh
      polybar
+     gnome.gnome-screenshot
   ];
 
   services.blueman.enable = true;
