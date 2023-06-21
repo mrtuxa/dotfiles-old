@@ -6,5 +6,7 @@
     libmicrohttpd
     boost
     vscodium
+    nodejs
+    tree-sitter
  ];
 }

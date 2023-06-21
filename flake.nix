@@ -4,13 +4,12 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    stable.url = "github:nixos/nixpkgs/nixos-23.05";
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Hardware quirks
-    hardware.url = "github:nixos/nixos-hardware";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -49,7 +48,9 @@
         specialArgs = {
           inherit inputs outputs;
         }; # Pass flake inputs to our config
-        modules = [./hosts/laptop];
+        modules = [
+        ./hosts/laptop
+        ];
       };
     };
   };
