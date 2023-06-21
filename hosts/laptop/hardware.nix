@@ -12,9 +12,11 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
-
+  boot = {
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
+    supportedFilesystems = [ "ntfs" ];
+  };
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/8cd02a4e-e5d5-4b1d-880b-a06bf4d2588e";
     fsType = "ext4";
