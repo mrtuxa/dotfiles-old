@@ -13,7 +13,7 @@
   ];
 
   boot = {
-    kernelModules = ["kvm-amd"];
+    kernelModules = ["kvm-amd" "amdgpu"];
     extraModulePackages = [];
     supportedFilesystems = [ "ntfs" ];
   };

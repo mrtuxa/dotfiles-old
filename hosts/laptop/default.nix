@@ -91,6 +91,7 @@
     };
     xserver.enable = true; 
     xserver = {
+      videoDrivers = [ "amdgpu" ];
       desktopManager.xfce.enable = true;
       displayManager.sddm.enable  = true;
       windowManager.bspwm = {
@@ -307,4 +308,5 @@ nix.settings.trusted-public-keys = [
 nix.settings.substituters = [
   "https://cache.iog.io"
 ];
+
 }
