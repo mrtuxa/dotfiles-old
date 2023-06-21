@@ -86,6 +86,14 @@
 
   
   services = {
+    picom = {
+      enable = true;
+      vSync = true;
+      fade = true;
+      activeOpacity = 0.9;
+      inactiveOpacity = 0.5;
+      fadeDelta = 3;
+    };
     xserver.enable = true; 
     xserver = {
       desktopManager.xfce.enable = true;
@@ -241,6 +249,9 @@
       };
    };
   };
+
+
+
   environment.systemPackages = with pkgs; [
      xfce.xfce4-whiskermenu-plugin	
      ksuperkey
