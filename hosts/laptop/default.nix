@@ -119,7 +119,7 @@
                 alacritty
 
               # program launcher
-              super + @space
+              super + d
                 rofi -show drun
 
               # make sxhkd reload its configuration files:
@@ -241,6 +241,7 @@
      libsForQt5.qtstyleplugins
      virt-manager
      rofi
+     sxhkd
   ];
 
   services.blueman.enable = true;
