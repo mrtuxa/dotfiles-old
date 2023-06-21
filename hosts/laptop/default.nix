@@ -93,8 +93,14 @@
       windowManager.bspwm = {
           enable = true;
           configFile = pkgs.writeShellScript "bspwmrc" ''
+
             pgrep -x sxhkd > /dev/null || sxhkd &
             feh --bg-fill /home/mrtuxa/todotfiles/assets/wallpaper.png
+            polybar & 
+            
+            # auto start
+            polybar -q main -c /home/mrtuxa/todotfiles/assets/polybar/config.ini
+
             bspc monitor -d 1 2 3 4 5 6 7 8 9 10
             bspc config border_width         2
             bspc config window_gap          12
